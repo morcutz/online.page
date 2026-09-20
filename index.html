@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MORCUTZ | Barbería Urbana & Estilo Premium</title>
+    <meta name="description" content="No es solo un corte. Es tu carta de presentación. Reserva tu turno online en MORCUTZ en menos de 1 minuto. Barbería urbana, fades, perfilado de barba y estilo premium.">
+    
+    <!-- PWA & Favicon -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="icon" type="image/png" href="assets/img/logo.jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="#" class="logo">MOR<span>CUTZ</span></a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#barberos">Barberos</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#membresias">Club MORCUTZ</a></li>
+                <li><a href="#tienda">Tienda</a></li>
+                <li><a href="#contacto">Ubicación</a></li>
+            </ul>
+        </nav>
+        <a href="#reservas" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Reservar</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video-bg" autoplay loop muted playsinline poster="assets/img/logo.jpeg">
+            <source src="assets/video/hero-loop.webm" type="video/webm">
+            <source src="assets/video/hero-loop.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Estilo & Precisión Urbana</span>
+            <h1 class="hero-title">No es solo un corte.<br><span class="text-gold">Es tu carta de presentación.</span></h1>
+            <p class="hero-sub">Estilo premium, precisión de autor y la experiencia urbana que te mereces.</p>
+            <a href="#reservas" class="btn btn-primary">RESERVAR TURNO AHORA</a>
+        </div>
+    </section>
+
+    <!-- Reseñas / Proof Box -->
+    <div class="container" style="margin-top: -30px; position: relative; z-index: 10;">
+        <div class="rating-box">
+            <div class="stars">★★★★★</div>
+            <p style="font-weight: 700; font-size: 1.1rem; color: #fff;">4.9 / 5.0 en Google Maps</p>
+            <p style="font-size: 0.85rem; color: var(--text-secondary);">Más de 350 clientes satisfechos en la ciudad</p>
+        </div>
+    </div>
+
+    <!-- Sistema de Reservas Modal / Section -->
+    <section id="reservas" class="section-padding container">
+        <h2 class="section-title">RESERVA TU <span class="text-gold">TURNO</span></h2>
+        <p class="section-subtitle">Completa tu reserva rápida en solo 3 pasos</p>
+        
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem 1.25rem; text-align: center;">
+            <div id="booking-wizard">
+                <div style="display: flex; justify-content: space-around; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                    <span id="step-1-indicator" class="badge" style="background: var(--accent-gold); color: #000;">1. Servicio</span>
+                    <span id="step-2-indicator" class="badge">2. Barbero & Hora</span>
+                    <span id="step-3-indicator" class="badge">3. Confirmación</span>
+                </div>
+
+                <!-- Step 1: Servicio -->
+                <div id="step-1" class="booking-step">
+                    <h3 style="margin-bottom: 1rem;">Selecciona tu servicio</h3>
+                    <div class="services-grid">
+                        <button class="service-card" onclick="selectService('Corte MORCUTZ Signature', '$XX')">
+                            <div class="service-header">
+                                <span class="service-name">Corte MORCUTZ Signature</span>
+                                <span class="service-price">$XX</span>
+                            </div>
+                            <div class="service-meta">⏱ 45 min</div>
+                            <p class="service-desc">Asesoramiento de visajismo, degradado fade a elección, lavado y peinado final.</p>
+                        </button>
+                        <button class="service-card" onclick="selectService('Full Experience (Corte + Barba)', '$XX')">
+                            <div class="service-header">
+                                <span class="service-name">Full Experience</span>
+                                <span class="service-price">$XX</span>
+                            </div>
+                            <div class="service-meta">⏱ 60 min</div>
+                            <p class="service-desc">Corte signature + Ritual spa de barba con toalla caliente y bebida de cortesía.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Barbero & Fecha -->
+                <div id="step-2" class="booking-step" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Selecciona Barbero y Horario</h3>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem;">
+                        <button class="btn btn-outline" onclick="selectBarber('Mateo (FadeMaster)')">Mateo (FadeMaster)</button>
+                        <button class="btn btn-outline" onclick="selectBarber('Lucas (Classic)')">Lucas (Classic)</button>
+                    </div>
+                    <input type="datetime-local" id="booking-time" style="background: var(--bg-card); color: #fff; border: 1px solid var(--border-color); padding: 0.8rem; border-radius: var(--radius-sm); font-family: inherit; margin-bottom: 1.5rem;">
+                    <br>
+                    <button class="btn btn-primary" onclick="goToStep(3)">Continuar a Confirmación</button>
+                </div>
+
+                <!-- Step 3: Confirmación -->
+                <div id="step-3" class="booking-step" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Confirma tu Reserva</h3>
+                    <p id="booking-summary" style="color: var(--accent-gold); margin-bottom: 1.5rem; font-size: 1.1rem;"></p>
+                    <form onsubmit="confirmBooking(event)" style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                        <input type="text" placeholder="Tu Nombre Completo" required style="padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-sm);">
+                        <input type="tel" placeholder="Tu Teléfono (WhatsApp)" required style="padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-sm);">
+                        <button type="submit" class="btn btn-primary">CONFIRMAR TURNO</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menú de Servicios (Lista/Tabla) -->
+    <section id="servicios" class="section-padding container">
+        <h2 class="section-title">NUESTROS <span class="text-gold">SERVICIOS</span></h2>
+        <p class="section-subtitle">Técnica impecables, productos de primera línea</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Corte MORCUTZ Signature</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <div class="service-meta">⏱ 45 min</div>
+                <p class="service-desc">Asesoramiento de visajismo, degradado/fade a elección, lavado y peinado con producto premium.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Barba Ritual Spa</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <div class="service-meta">⏱ 30 min</div>
+                <p class="service-desc">Perfilado con navaja tradicional, toalla caliente con aceites esenciales e hidratación profunda.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Full Experience (Corte + Barba)</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <div class="service-meta">⏱ 60 min</div>
+                <p class="service-desc">Servicio completo de corte y barba + bebida de cortesía (Cerveza artesanal o Café expreso).</p>
+            </div>
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Color & Camuflaje</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <div class="service-meta">⏱ 45 min</div>
+                <p class="service-desc">Matización de canas o tinte de fantasía con protección capilar de alta gama.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fichas del Staff -->
+    <section id="barberos" class="section-padding container">
+        <h2 class="section-title">MAESTROS <span class="text-gold">BARBEROS</span></h2>
+        <p class="section-subtitle">Especialistas apasionados por el detalle</p>
+        
+        <div class="barbers-scroll">
+            <div class="barber-card">
+                <div class="barber-img-wrapper">
+                    <img src="assets/images/barbers/mateo.webp" alt="Mateo FadeMaster" loading="lazy">
+                </div>
+                <div class="barber-info">
+                    <h3 class="barber-name">Mateo "FadeMaster"</h3>
+                    <p class="barber-role">Especialidad: Fades & Diseños Urbanos</p>
+                    <p class="barber-exp">6 años de experiencia perfeccionando la navaja y los degradados de máxima precisión.</p>
+                    <a href="#reservas" class="btn btn-outline" style="width: 100%; font-size: 0.9rem;">Reservar con Mateo</a>
+                </div>
+            </div>
+            <div class="barber-card">
+                <div class="barber-img-wrapper">
+                    <img src="assets/images/barbers/lucas.webp" alt="Lucas The Classic" loading="lazy">
+                </div>
+                <div class="barber-info">
+                    <h3 class="barber-name">Lucas "The Classic"</h3>
+                    <p class="barber-role">Especialidad: Perfilado & Estilos Clásicos</p>
+                    <p class="barber-exp">9 años liderando el cuidado tradicional de barba y tijera clásica.</p>
+                    <a href="#reservas" class="btn btn-outline" style="width: 100%; font-size: 0.9rem;">Reservar con Lucas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería / Portafolio -->
+    <section id="galeria" class="section-padding container">
+        <h2 class="section-title">PORTAFOLIO <span class="text-gold">DE TRABAJOS</span></h2>
+        <p class="section-subtitle">Inspecciona la calidad de nuestros terminados</p>
+        
+        <div class="gallery-filters">
+            <button class="filter-chip active" onclick="filterGallery('all')">Todos</button>
+            <button class="filter-chip" onclick="filterGallery('fade')">Fades</button>
+            <button class="filter-chip" onclick="filterGallery('barba')">Barba</button>
+            <button class="filter-chip" onclick="filterGallery('clasico')">Clásicos</button>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade"><img src="assets/images/gallery/fade-1.webp" alt="Corte Fade MORCUTZ" loading="lazy"></div>
+            <div class="gallery-item barba"><img src="assets/images/gallery/barba-1.webp" alt="Barba Perfilada" loading="lazy"></div>
+            <div class="gallery-item clasico"><img src="assets/images/gallery/clasico-1.webp" alt="Corte Clásico" loading="lazy"></div>
+            <div class="gallery-item fade"><img src="assets/images/gallery/fade-2.webp" alt="Skin Fade High" loading="lazy"></div>
+        </div>
+    </section>
+
+    <!-- Membresías & Club MORCUTZ -->
+    <section id="membresias" class="section-padding container">
+        <h2 class="section-title">CLUB <span class="text-gold">MORCUTZ</span></h2>
+        <p class="section-subtitle">Mantén tu estilo impecable todo el mes pagando menos</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <div class="membership-card">
+                <span class="badge">Suscripción Mensual</span>
+                <h3 style="margin-top: 1rem; font-size: 1.8rem;">Pase Libre Mensual</h3>
+                <div class="membership-price">$XX <span style="font-size: 1rem; color: var(--text-secondary);">/mes</span></div>
+                <ul style="list-style: none; text-align: left; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    <li style="margin-bottom: 0.5rem;">✓ Cortes e higienes ilimitadas al mes</li>
+                    <li style="margin-bottom: 0.5rem;">✓ 10% OFF en productos de la tienda</li>
+                    <li style="margin-bottom: 0.5rem;">✓ Reserva prioritaria fin de semana</li>
+                </ul>
+                <a href="#reservas" class="btn btn-primary" style="width: 100%;">UNIRME AL CLUB</a>
+            </div>
+            <div class="membership-card" style="border-color: var(--border-color); background: var(--bg-surface);">
+                <span class="badge" style="background: rgba(255,255,255,0.05); color: #fff;">Programa de Puntos</span>
+                <h3 style="margin-top: 1rem; font-size: 1.8rem;">Puntos MORCUTZ</h3>
+                <div class="membership-price" style="color: #fff;">Acumula 5%</div>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">Sumás puntos en cada visita y canjeálos por productos oficiales o servicios gratis.</p>
+                <a href="#reservas" class="btn btn-outline" style="width: 100%;">VER MÁS INFO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tienda Online -->
+    <section id="tienda" class="section-padding container">
+        <h2 class="section-title">TIENDA <span class="text-gold">OFICIAL</span></h2>
+        <p class="section-subtitle">Cuidado masculino profesional para llevar a casa</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Pomada Mate MORCUTZ Wax (100g)</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <p class="service-desc">Fijación fuerte sin brillo para un estilo estructurado y natural durante todo el día.</p>
+                <button class="btn btn-outline" style="margin-top: 1rem; font-size: 0.85rem;" onclick="addToCart('Pomada Mate')">Comprar / Retirar en Local</button>
+            </div>
+            <div class="service-card">
+                <div class="service-header">
+                    <span class="service-name">Aceite Barba MORCUTZ Oil (30ml)</span>
+                    <span class="service-price">$XX</span>
+                </div>
+                <p class="service-desc">Nutrición intensa con aroma a madera de cedro y bergamota. Aporta suavidad y brillo controlado.</p>
+                <button class="btn btn-outline" style="margin-top: 1rem; font-size: 0.85rem;" onclick="addToCart('Aceite Barba')">Comprar / Retirar en Local</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Contacto -->
+    <section id="contacto" class="section-padding container">
+        <h2 class="section-title">UBICACIÓN & <span class="text-gold">HORARIOS</span></h2>
+        <p class="section-subtitle">Te esperamos en nuestro local</p>
+
+        <div style="background: var(--bg-surface); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid var(--border-color); text-align: center;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">MORCUTZ Studio</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">📍 Av. Principal 1234, Barrio Norte</p>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">🕒 Lunes a Sábados de 10:00 a 20:00 hs</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-primary">CÓMO LLEGAR (MAPS / WAZE)</a>
+        </div>
+    </section>
+
+    <!-- Sticky Bottom Bar (Mobile Thumb Zone) -->
+    <div class="sticky-bar">
+        <a href="#reservas" class="btn btn-primary sticky-btn-main">📅 RESERVAR TURNO</a>
+        <a href="https://wa.me/123456789" target="_blank" rel="noopener" class="sticky-btn-wsp" aria-label="Contacto por WhatsApp">💬</a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+    <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registrado con éxito'))
+                    .catch(err => console.log('Error registrando Service Worker:', err));
+            });
+        }
+    </script>
+</body>
+</html>
